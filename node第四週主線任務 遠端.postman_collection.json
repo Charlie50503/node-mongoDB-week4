@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "d1924aab-1d19-48a4-88b7-f4c6c52b9a1a",
+		"name": "node第四週主線任務 遠端",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "新增貼文",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"628089ecf725781e31136129\",\r\n    \"content\":\"content 22\",\r\n    \"imgUrl\":\"url\",\r\n    \"likes\":0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得user資料",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/users",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得所有貼文",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/posts",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "測試沒有的路由",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/error",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"error"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加回覆",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"628089ecf725781e31136129\",\r\n    \"content\": \"comment\",\r\n    \"likes\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/posts/comment/62808e268a3812c0cec923ef",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"posts",
+						"comment",
+						"62808e268a3812c0cec923ef"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
