@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const posts = require('../controllers/post')
-
-router.get('/',posts.get)
-router.post('/',posts.post)
-router.post('/comment/:postId',posts.postComment)
+const {handleErrorAsync} = require('../utils/errorHandle')
+router.get('/',handleErrorAsync(posts.get))
+router.post('/',handleErrorAsync(posts.post))
+router.post('/comment/:postId',handleErrorAsync(posts.postComment))
 
 module.exports = router;
