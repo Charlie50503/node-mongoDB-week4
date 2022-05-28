@@ -18,23 +18,10 @@ const users = {
     const userData = await User.find()
     successHandle(req, res, userData)
   },
+
   async postSignUp(req, res, next) {
-    const { email, password, confirmPassword, name } = req.body
-
-    if (!email || !password || !confirmPassword || !name) {
-      return next(appError('400', msg.fieldNotCorrect, next))
-    }
-    if (password !== confirmPassword) {
-      return next(appError('400', msg.fieldNotCorrect, next))
-    }
-    if (!validator.isLength(password, { min: 8 })) {
-      return next(appError('400', msg.passwordLengthNotMatch, next))
-    }
-    if (!validator.isEmail(email)) {
-      return next(appError('400', msg.emailFormatNotCorrect, next))
-    }
-
-    const bcryptPassword = await bcrypt.hash(req.body.password, 12)
+    const { email, password, name } = req.body
+    const bcryptPassword = await bcrypt.hash(password, 12)
     let newUser
     try {
       newUser = await User.create({
@@ -50,17 +37,9 @@ const users = {
     }
     generateSendJWT(newUser, 201, res)
   },
+
   async postSignIn(req, res, next) {
     const { email, password } = req.body
-    if (!email || !password) {
-      return next(appError('400', msg.fieldNotCorrect, next))
-    }
-    if (!validator.isLength(password, { min: 8 })) {
-      return next(appError('400', msg.passwordLengthNotMatch, next))
-    }
-    if (!validator.isEmail(email)) {
-      return next(appError('400', msg.emailFormatNotCorrect, next))
-    }
     const user = await User.findOne({
       email
     }).select('+password');
