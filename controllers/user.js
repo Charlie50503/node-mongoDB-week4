@@ -1,10 +1,11 @@
 const User = require('../models/user')
-const {successHandle} = require('../services/successHandle')
+const {successHandle} = require('../utils/successHandle')
 const appError = require('../utils/appError')
 const validator = require('validator')
 const msg = require('../msg/msg')
 const bcrypt = require('bcryptjs/dist/bcrypt')
 const { generateSendJWT } = require('../middleware/auth')
+const {getTokenId} = require('../utils/token')
 const users = {
   async get(req, res) {
     const userData = await User.find()
@@ -53,9 +54,19 @@ const users = {
     }
     generateSendJWT(user, 201, res)
   },
-  async postUpdatePassword(req, res) {
-    const userData = await User.find()
-    successHandle(req, res, userData)
+
+  async postUpdatePassword(req, res,next) {
+    const { password } = req.body
+    const bcryptPassword = await bcrypt.hash(password, 12)
+    const userId = await getTokenId()
+    const result = await User.findByIdAndUpdate(userId,{
+      password:bcryptPassword
+    })
+    if(!result) next(appError('400', '更新密碼不成功', next))
+    const data = {
+      message:'更新成功'
+    }
+    successHandle(req, res, data)
   },
 }
 
