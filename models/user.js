@@ -13,8 +13,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'password 必填'],
     select: false,
-    trim: true,
-    lowercase: true,
   },
   name: {
     type: String,
