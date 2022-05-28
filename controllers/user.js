@@ -35,8 +35,9 @@ const users = {
     }
 
     const bcryptPassword = await bcrypt.hash(req.body.password, 12)
+    let newUser
     try {
-      const newUser = await User.create({
+      newUser = await User.create({
         email,
         password: bcryptPassword,
         name,
@@ -51,7 +52,6 @@ const users = {
   },
   async postSignIn(req, res, next) {
     const { email, password } = req.body
-
     if (!email || !password) {
       return next(appError('400', msg.fieldNotCorrect, next))
     }
@@ -61,14 +61,18 @@ const users = {
     if (!validator.isEmail(email)) {
       return next(appError('400', msg.emailFormatNotCorrect, next))
     }
-    const user = await User.findOne({ email }).select('+password')
-    console.log('user', user)
-    const auth = await bcrypt.compare(password, user.password)
-    console.log('auth', auth)
-    if (!auth) {
-      return next(appError(400, msg.passwordNotCorrect, next))
+    const user = await User.findOne({
+      email
+    }).select('+password');
+    if (!user) {
+      return next(appError('400', '不存在該筆資料',next));
     }
-    generateSendJWT(newUser, 201, res)
+    
+    const auth = await bcrypt.compare(password, user.password);
+    if (!auth) {
+      return next(appError('400','您的密碼不正確',next));
+    }
+    generateSendJWT(user, 201, res)
   },
   async postUpdatePassword(req, res) {
     const userData = await User.find()
