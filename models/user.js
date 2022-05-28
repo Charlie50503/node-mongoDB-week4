@@ -20,11 +20,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'name 必填'],
   },
+  sex: {
+    type: String,
+    enum:["male","female"]
+  },
   photoUrl: {
     type: String,
     default: '',
   },
   createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updateAt: {
     type: Date,
     default: Date.now,
   },
