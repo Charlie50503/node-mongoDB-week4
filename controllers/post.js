@@ -1,6 +1,6 @@
 const Post = require('../models/post')
 const appError = require('../utils/appError')
-const successHandle = require('../services/successHandle')
+const {successHandle} = require('../services/successHandle')
 const {
   isUserId,
   isImgUrl,

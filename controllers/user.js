@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const successHandle = require('../services/successHandle')
+const {successHandle} = require('../services/successHandle')
 const appError = require('../utils/appError')
 const validator = require('validator')
 const msg = require('../msg/msg')
