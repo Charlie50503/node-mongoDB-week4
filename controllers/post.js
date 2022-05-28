@@ -1,12 +1,7 @@
 const Post = require('../models/post')
 const appError = require('../utils/appError')
-const {successHandle} = require('../services/successHandle')
-const {
-  isUserId,
-  isImgUrl,
-  isContent,
-  isLikes
-} = require('../utils/validation')
+const {successHandle} = require('../utils/successHandle')
+const {utilsValidation} = require('../utils/validation')
 
 
 const posts = {
@@ -21,16 +16,16 @@ const posts = {
   async post(req,res,next){
     const { body } = req
 
-    if(!isUserId(body.userId)){
+    if(!utilsValidation.isUserId(body.userId)){
       return next(appError('400',"沒有正確的 user id",next))
     }
-    if(!isImgUrl(body.imgUrl)){
+    if(!utilsValidation.isImgUrl(body.imgUrl)){
       return next(appError('400',"沒有正確的 img url",next))
     }
-    if(!isContent(body.content)){
+    if(!utilsValidation.isContent(body.content)){
       return next(appError('400',"沒有正確的 content",next))
     }
-    if(!isLikes(body.likes)){
+    if(!utilsValidation.isLikes(body.likes)){
       return next(appError('400',"沒有正確的 likes",next))
     }
     const postData = {
@@ -47,13 +42,13 @@ const posts = {
     const {postId}= req.params
     if(!postId) next(appError('400',"沒有 post id",next))
     const reqBody =req.body
-    if(!isUserId(reqBody.userId)){
+    if(!utilsValidation.isUserId(reqBody.userId)){
       return next(appError('400',"沒有正確的 user id",next))
     }
-    if(!isContent(reqBody.content)){
+    if(!utilsValidation.isContent(reqBody.content)){
       return next(appError('400',"沒有正確的 content",next))
     }
-    if(!isLikes(reqBody.likes)){
+    if(!utilsValidation.isLikes(reqBody.likes)){
       return next(appError('400',"沒有正確的 likes",next))
     }
     
