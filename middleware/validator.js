@@ -2,6 +2,7 @@ const validator = require('validator')
 const { handleErrorAsync } = require('../utils/errorHandle')
 const appError = require('../utils/appError')
 const msg = require('../msg/msg')
+const {utilsValidation} = require('../utils/validation')
 class Validator {
   static checkSignUp = handleErrorAsync(async (req, res, next) => {
     const { email, password, confirmPassword, name } = req.body
@@ -46,6 +47,24 @@ class Validator {
       return next(appError('400', msg.passwordNotMatch, next))
     }
 
+    next()
+  })
+
+  static checkUpdateProfile = handleErrorAsync(async (req, res, next) => {
+    const { name, sex, photoUrl } = req.body
+    if(name && !utilsValidation.isName(name)) {
+      return next(appError('400', msg.fieldNotCorrect, next))
+    }
+    if(sex && !utilsValidation.isSex(sex)) {
+      return next(appError('400', msg.fieldNotCorrect, next))
+    }
+    if(sex!=="male" && sex!=="female"){
+      return next(appError('400', msg.sexInputTypeError, next))
+    }
+    
+    if(photoUrl && !utilsValidation.isPhotoUrl(photoUrl)) {
+      return next(appError('400', msg.fieldNotCorrect, next))
+    }
     next()
   })
 }
