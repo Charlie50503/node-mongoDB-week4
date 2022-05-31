@@ -5,6 +5,7 @@ const msg = {
   emailFormatNotCorrect:'Email 格式不正確',
   notLoginIn:'你尚未登入!',
   passwordNotCorrect:'密碼不正確!',
+  sexInputTypeError:'性別格式輸入錯誤'
 }
 
 module.exports = msg
