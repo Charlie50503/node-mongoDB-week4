@@ -11,13 +11,26 @@ const users = {
     const userData = await User.find()
     successHandle(req, res, userData)
   },
-  async getProfile(req, res) {
-    const userData = await User.find()
+  async getProfile(req, res,next) {
+    const userId = await getTokenId(req,res,next)
+    const userData = await User.findById(userId)
+    if(!userData) return next(appError('400', '取得失敗', next))
     successHandle(req, res, userData)
   },
-  async patchProfile(req, res) {
-    const userData = await User.find()
-    successHandle(req, res, userData)
+  async patchProfile(req, res,next) {
+    const { name, sex, photoUrl } = req.body
+    const updateDate = {}
+    if(name) updateDate.name = name
+    if(sex) updateDate.sex = sex
+    if(photoUrl) updateDate.photoUrl = photoUrl
+    const userId = await getTokenId(req,res,next)
+    const result = await User.findByIdAndUpdate(userId, { 
+      ...updateDate,
+      updateAt:Date()
+    },
+    { upsert: true, returnOriginal: false })
+    if(!result) return next(appError('400', '更新失敗', next))
+    successHandle(req, res, result)
   },
 
   async postSignUp(req, res, next) {
@@ -58,7 +71,7 @@ const users = {
   async postUpdatePassword(req, res,next) {
     const { password } = req.body
     const bcryptPassword = await bcrypt.hash(password, 12)
-    const userId = await getTokenId()
+    const userId = await getTokenId(req,res,next)
     const result = await User.findByIdAndUpdate(userId,{
       password:bcryptPassword
     })
