@@ -1,27 +1,39 @@
+function isString(value) {
+  if (typeof value !== 'string') return false
+  return true
+}
+function isNumber(value) {
+  if (typeof value !== 'number') return false
+  return true
+}
 
 class utilsValidation {
-  static isUserId(userId){
-    if(typeof userId!=="string") return false
-    return true
+  static isUserId(value) {
+    return isString(value)
   }
-  
-  static isImgUrl(imgUrl){
-    if(typeof imgUrl!=="string") return false
-    return true
+  static isName(value) {
+    return isString(value)
   }
-  
-  static isContent(content){
-    if(typeof content!=="string") return false
-    return true
+  static isSex(value) {
+    return isString(value)
   }
-  
-  static isLikes(likes){
-    if(typeof likes!=="number") return false
-    return true
+
+  static isPhotoUrl(value) {
+    return isString(value)
+  }
+  static isImgUrl(value) {
+    return isString(value)
+  }
+
+  static isContent(value) {
+    return isString(value)
+  }
+
+  static isLikes(likes) {
+    return isNumber(likes)
   }
 }
 
-
 module.exports = {
-  utilsValidation
+  utilsValidation,
 }
