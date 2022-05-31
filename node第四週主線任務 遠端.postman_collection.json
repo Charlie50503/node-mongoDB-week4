@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d1924aab-1d19-48a4-88b7-f4c6c52b9a1a",
+		"_postman_id": "689d39a4-d2f6-4af6-92fa-32b84bb12ee5",
 		"name": "node第四週主線任務 遠端",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21088341"
 	},
 	"item": [
 		{
@@ -75,6 +76,66 @@
 			"response": []
 		},
 		{
+			"name": "註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"adam\",\r\n    \"email\":\"test7@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"confirmPassword\":\"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/users/sign_up",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"sign_up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"test7@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/users/sign_in",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "測試沒有的路由",
 			"request": {
 				"method": "GET",
@@ -89,6 +150,84 @@
 					],
 					"path": [
 						"error"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得個人資料",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTYxZWUyMWRiNjRiNGVmMDU5YjYwMCIsImlhdCI6MTY1NDAwNTU2MCwiZXhwIjoxNjU0NjEwMzYwfQ.l7warGpnXGZ3eYDl_4PcSBhb0ERgegemlvZJFuR5Es4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/users/profile",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新個人資料",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTFkNTE0NzgzZjYyOGJjNTc1YzZlMCIsImlhdCI6MTY1Mzc4NDM3MiwiZXhwIjoxNjU0Mzg5MTcyfQ._M-3VlGqWy93KD3ghSQ88KiSbOXqGTh5F8wL9uotrCw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"adam11232132asdasd1aaaa1\",\r\n    \"photoUrl\": \"1231212312asdasd313\",\r\n    \"sex\":\"female\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/users/profile",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"profile"
 					]
 				}
 			},
