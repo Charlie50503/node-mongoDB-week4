@@ -20,7 +20,10 @@ const userSchema = new mongoose.Schema({
   },
   sex: {
     type: String,
-    enum:["male","female"]
+    enum:[{
+      values: ['male','female'],
+      message: '{VALUE} is not supported'
+    }],
   },
   photoUrl: {
     type: String,
