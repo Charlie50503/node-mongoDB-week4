@@ -2,7 +2,7 @@ const Post = require('../models/post')
 const appError = require('../utils/appError')
 const {successHandle} = require('../utils/successHandle')
 const {utilsValidation} = require('../utils/validation')
-
+const {getTokenId} = require('../utils/token')
 
 const posts = {
   async get(req,res,next){
@@ -16,9 +16,7 @@ const posts = {
   async post(req,res,next){
     const { body } = req
 
-    if(!utilsValidation.isUserId(body.userId)){
-      return next(appError('400',"沒有正確的 user id",next))
-    }
+    const userId = await getTokenId(req,res,next)
     if(!utilsValidation.isImgUrl(body.imgUrl)){
       return next(appError('400',"沒有正確的 img url",next))
     }
@@ -29,7 +27,7 @@ const posts = {
       return next(appError('400',"沒有正確的 likes",next))
     }
     const postData = {
-      user:body.userId,
+      user:userId,
       content:body.content,
       imgUrl:body.imgUrl,
       likes:body.likes
