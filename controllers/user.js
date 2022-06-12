@@ -13,7 +13,7 @@ const users = {
   },
   async getProfile(req, res,next) {
     const userId = await getTokenId(req,res,next)
-    const userData = await User.findById(userId)
+    const userData = await User.findById(userId).select('+sex');
     if(!userData) return next(appError('400', '取得失敗', next))
     successHandle(req, res, userData)
   },
