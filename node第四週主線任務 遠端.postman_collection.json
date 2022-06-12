@@ -9,11 +9,21 @@
 		{
 			"name": "新增貼文",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\":\"628089ecf725781e31136129\",\r\n    \"content\":\"content 22\",\r\n    \"imgUrl\":\"url\",\r\n    \"likes\":0\r\n}",
+					"raw": "{\r\n    \"content\":\"content 22\",\r\n    \"imgUrl\":\"url\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -82,7 +92,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"adam\",\r\n    \"email\":\"test7@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"confirmPassword\":\"12345678\"\r\n}",
+					"raw": "{\r\n    \"name\":\"adam\",\r\n    \"email\":\"test10@gmail.com\",\r\n    \"password\":\"Aa12345678\",\r\n    \"confirmPassword\":\"Aa12345678\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,12 +117,26 @@
 		},
 		{
 			"name": "登入",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"\r",
+							"console.log(\"responseJson\",responseJson)\r",
+							"postman.setEnvironmentVariable(\"TOKEN\",responseJson.user.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"test7@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+					"raw": "{\r\n    \"email\":\"test14@gmail.com\",\r\n    \"password\":\"Aa12345678\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -201,7 +225,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTFkNTE0NzgzZjYyOGJjNTc1YzZlMCIsImlhdCI6MTY1Mzc4NDM3MiwiZXhwIjoxNjU0Mzg5MTcyfQ._M-3VlGqWy93KD3ghSQ88KiSbOXqGTh5F8wL9uotrCw",
+							"value": "{{TOKEN}}",
 							"type": "string"
 						}
 					]
