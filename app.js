@@ -4,7 +4,7 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 const {resErrorProd,resErrorDev} = require('./utils/errorHandle')
-
+const {checkRequestBodyJsonFormatter} = require('./middleware/json')
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 var postsRouter = require('./routes/posts')
@@ -26,12 +26,14 @@ require('./connections')
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use(checkRequestBodyJsonFormatter);
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/posts', postsRouter)
@@ -56,7 +58,6 @@ app.use(function (err, req, res, next) {
   }
   resErrorProd(err, res)
 })
-
 
 process.on('unhandledRejection',(error,promise)=>{
   console.error('未捕捉到 rejection:',promise,'原因',error)
