@@ -16,11 +16,11 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
   if (!token) {
     return next(appError(401, msg.notLoginIn, next))
   }
-
   const decoded = await new Promise((resolve, reject) => {
     jwt.verify(token, process.env.JWT_SECRET, (error, payload) => {
       if (error) {
-        reject(error)
+        // reject(error)
+        return next(appError(401, msg.tokenIsNotCorrect, next))
       } else {
         resolve(payload)
       }
