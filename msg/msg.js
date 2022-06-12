@@ -1,5 +1,6 @@
 const msg = {
   fieldNotCorrect:'欄位未填寫正確！',
+  nameToShort:'暱稱不得小於2位數！',
   passwordNotMatch:'密碼不一致！',
   passwordLengthNotMatch:'密碼字數低於 8 碼',
   emailFormatNotCorrect:'Email 格式不正確',

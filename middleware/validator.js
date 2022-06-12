@@ -67,6 +67,9 @@ class Validator {
     if(name && !utilsValidation.isName(name)) {
       return next(appError('400', msg.fieldNotCorrect, next))
     }
+    if(!validator.isLength(name,{ min: 2 })){
+      return next(appError('400', msg.nameToShort, next))
+    }
     if(sex && !utilsValidation.isSex(sex)) {
       return next(appError('400', msg.fieldNotCorrect, next))
     }
