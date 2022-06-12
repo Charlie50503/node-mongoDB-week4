@@ -12,9 +12,12 @@ const {
 } = require('imgur');
 const upload = {
   async image(req, res,next) {
-    if(req.file.length <= 0){
-      return next(appError(400,"尚未上傳檔案",next))
+    if(!req.hasOwnProperty('file')){
+      return next(appError(400,"沒找到檔案",next))
     }
+    // if(req.file.length <= 0){
+    //   return next(appError(400,"尚未上傳檔案",next))
+    // }
     // const dimensions = sizeOf(req.file.buffer)
     // if(dimensions.width !== dimensions.height) {
     //   return next(appError(400,"圖片長寬不符合1:1 尺寸",next))

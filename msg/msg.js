@@ -13,6 +13,7 @@ const msg = {
   sexInputTypeError:'性別格式輸入錯誤',
   jsonFormatterNotCorrect:'JSON格式不對!',
   failUploadImg:'上傳圖片失敗!',
+  notFoundFile:'沒找到檔案!',
 }
 
 module.exports = msg
