@@ -180,6 +180,52 @@
 			"response": []
 		},
 		{
+			"name": "upload img",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/C:/Users/cate5/OneDrive/圖片/Saved Pictures/3.jpg"
+						},
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/cate5/OneDrive/圖片/Saved Pictures/2.jpg",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://fierce-beach-31573.herokuapp.com/upload",
+					"protocol": "https",
+					"host": [
+						"fierce-beach-31573",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "取得個人資料",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
