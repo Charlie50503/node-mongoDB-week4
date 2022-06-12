@@ -23,14 +23,11 @@ const posts = {
     if(!utilsValidation.isContent(body.content)){
       return next(appError('400',"沒有正確的 content",next))
     }
-    if(!utilsValidation.isLikes(body.likes)){
-      return next(appError('400',"沒有正確的 likes",next))
-    }
+
     const postData = {
       user:userId,
       content:body.content,
       imgUrl:body.imgUrl,
-      likes:body.likes
     }
     const result = await Post.create(postData)
     successHandle(req,res,result)
