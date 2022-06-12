@@ -11,7 +11,8 @@ const msg = {
   passwordNotString:'密碼強度不夠!',
   accountOrPasswordNotCorrect:'帳號或密碼錯誤!',
   sexInputTypeError:'性別格式輸入錯誤',
-  jsonFormatterNotCorrect:'JSON格式不對!'
+  jsonFormatterNotCorrect:'JSON格式不對!',
+  failUploadImg:'上傳圖片失敗!',
 }
 
 module.exports = msg
