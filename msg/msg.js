@@ -5,6 +5,8 @@ const msg = {
   emailFormatNotCorrect:'Email 格式不正確',
   notLoginIn:'你尚未登入!',
   passwordNotCorrect:'密碼不正確!',
+  passwordNotMatchEnglishAndNumber:'密碼需要英數混和!',
+  passwordNotString:'密碼強度不夠!',
   sexInputTypeError:'性別格式輸入錯誤'
 }
 

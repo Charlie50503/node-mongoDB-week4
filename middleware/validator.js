@@ -16,6 +16,12 @@ class Validator {
     if (!validator.isLength(password, { min: 8 })) {
       return next(appError('400', msg.passwordLengthNotMatch, next))
     }
+    if (validator.isNumeric(password) || validator.isAlpha(password)) {
+      return next(appError('400', msg.passwordNotMatchEnglishAndNumber ,next))
+    }
+    if(validator.isStrongPassword(password,{returnScore :true})  <= 20){
+      return next(appError('400',msg.passwordNotString, next))
+    }
     if (!validator.isEmail(email)) {
       return next(appError('400', msg.emailFormatNotCorrect, next))
     }
@@ -30,6 +36,12 @@ class Validator {
     }
     if (!validator.isLength(password, { min: 8 })) {
       return next(appError('400', msg.passwordLengthNotMatch, next))
+    }
+    if (validator.isNumeric(password) || validator.isAlpha(password)) {
+      return next(appError('400', msg.passwordNotMatchEnglishAndNumber ,next))
+    }
+    if(validator.isStrongPassword(password,{returnScore :true})  <= 20){
+      return next(appError('400',msg.passwordNotString, next))
     }
     if (!validator.isEmail(email)) {
       return next(appError('400', msg.emailFormatNotCorrect, next))
