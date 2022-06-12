@@ -7,6 +7,7 @@ const msg = {
   passwordNotCorrect:'密碼不正確!',
   passwordNotMatchEnglishAndNumber:'密碼需要英數混和!',
   passwordNotString:'密碼強度不夠!',
+  accountOrPasswordNotCorrect:'帳號或密碼錯誤!',
   sexInputTypeError:'性別格式輸入錯誤'
 }
 

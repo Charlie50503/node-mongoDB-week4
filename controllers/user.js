@@ -59,12 +59,12 @@ const users = {
       email
     }).select('+password');
     if (!user) {
-      return next(appError('400', '不存在該筆資料',next));
+      return next(appError('400', msg.accountOrPasswordNotCorrect ,next));
     }
     
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      return next(appError('400','您的密碼不正確',next));
+      return next(appError('400',msg.accountOrPasswordNotCorrect,next));
     }
     generateSendJWT(user, 201, res)
   },
