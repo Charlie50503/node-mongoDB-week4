@@ -58,7 +58,8 @@ const posts = {
         content: reqBody.content,
         likes: reqBody.likes,
       }
-    }})
+    }},
+    { runValidators: true })
     let findResult =await Post.findById(postId)
     if(!result) next(appError('400',"沒有找到貼文",next))
     successHandle(req,res,findResult)

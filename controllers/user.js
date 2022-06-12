@@ -28,7 +28,8 @@ const users = {
       ...updateDate,
       updateAt:Date()
     },
-    { upsert: true, returnOriginal: false })
+    { upsert: true, returnOriginal: false,
+      runValidators :true })
     if(!result) return next(appError('400', '更新失敗', next))
     successHandle(req, res, result)
   },
@@ -74,6 +75,8 @@ const users = {
     const userId = await getTokenId(req,res,next)
     const result = await User.findByIdAndUpdate(userId,{
       password:bcryptPassword
+    },{
+      runValidators: true 
     })
     if(!result) next(appError('400', '更新密碼不成功', next))
     const data = {
