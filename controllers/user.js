@@ -6,8 +6,9 @@ const msg = require('../msg/msg')
 const bcrypt = require('bcryptjs/dist/bcrypt')
 const { generateSendJWT } = require('../middleware/auth')
 const {getTokenId} = require('../utils/token')
-const { sendMail } = require('../plugin/nodemailer')
-
+const {generatePassword} = require('../utils/generatePassword')
+const { sendMail } = require('../plugin/nodemailer/nodemailer')
+const {forgetPasswordTemplate} = require('../plugin/nodemailer/template/mailTemplate')
 const users = {
   async get(req, res) {
     const userData = await User.find()
@@ -89,17 +90,26 @@ const users = {
 
   async forgetPassword(req, res,next){
     const userId = await getTokenId(req,res,next)
+    const dummyPassword = generatePassword(10,1,1,1)
+    const bcryptPassword = await bcrypt.hash(dummyPassword, 12)
+    const updatePasswordResult = await User.findByIdAndUpdate(userId,{
+      password:bcryptPassword
+    },{
+      runValidators: true 
+    })
+    if(!updatePasswordResult) next(appError('400', '更新密碼不成功', next))
+
     const {email} = await User.findById(userId).select('+email');
     if(!email) next(appError('400', '沒找到對象User', next))
     var messageForm  = {
       to: email,
-      subject: '忘記密碼',
-      text: '忘記密碼的內容'
+      ...forgetPasswordTemplate(dummyPassword)
     };
-    const result = await sendMail(messageForm)
-    console.log("result",result);
+    generatePassword
+    const sendMailResult = await sendMail(messageForm)
+    console.log("sendMailResult",sendMailResult);
     const data = {
-      message:"送信成功"
+      message:sendMailResult
     }
     successHandle(req, res, data)
   }
