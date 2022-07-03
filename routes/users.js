@@ -11,5 +11,6 @@ router.patch('/profile',isAuth,Validator.checkUpdateProfile,handleErrorAsync(use
 router.post('/sign_up', Validator.checkSignUp,handleErrorAsync(users.postSignUp));
 router.post('/sign_in', Validator.checkSignIn,handleErrorAsync(users.postSignIn));
 router.post('/updatePassword',isAuth,Validator.checkUpdatePassword, handleErrorAsync(users.postUpdatePassword));
+router.post('/forgetPassword',isAuth,handleErrorAsync(users.forgetPassword));
 
 module.exports = router;
