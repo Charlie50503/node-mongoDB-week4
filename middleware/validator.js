@@ -13,6 +13,9 @@ class Validator {
     if (password !== confirmPassword) {
       return next(appError('400', msg.fieldNotCorrect, next))
     }
+    if(!validator.isLength(name,{ min: 2 })){
+      return next(appError('400', msg.nameToShort, next))
+    }
     if (!validator.isLength(password, { min: 8 })) {
       return next(appError('400', msg.passwordLengthNotMatch, next))
     }
