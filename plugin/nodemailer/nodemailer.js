@@ -8,6 +8,7 @@ var nodemailer = require('nodemailer')
  * @param {String} messageForm.to 收件人mail
  * @param {String} messageForm.subject 郵件主旨
  * @param {String} messageForm.text 郵件內容
+ * @param {String} messageForm.html 郵件HTML格式內容
  */
 const sendMail = (messageForm) =>
   new Promise((resolve, reject) => {
@@ -35,7 +36,7 @@ const sendMail = (messageForm) =>
           })
         }
         // console.log(info)
-        return resolve('send successful')
+        return resolve('送信成功')
       })
     } catch (error) {
       return reject({
